@@ -4,12 +4,12 @@ import Chaplin
 /**
  * Animation
  */
-extension ProgressIndicator {
+public extension ProgressIndicator {
    /**
     * Modulate the progress indicator (For iterative progress or looping animation)
     * PARAM: value: 0 - 1
     */
-   func progress(_ value:CGFloat){
+   @objc public func progress(_ value:CGFloat){
 //      Swift.print("💙 ProgressIndicator.progress: " + "\(value)")
       //Could the bellow be done simpler: think sequence looping in a video.
       let initAlpha:CGFloat = lineStyle.strokeColor.cgColor.alpha//<--can be moved to a global scope
@@ -43,7 +43,7 @@ extension ProgressIndicator {
     * NOTE: You also want to set the alpha gradually from half to full alpha in a half circle
     * TODO: The final tick should be 0, to make this happen you need to offset the i, possibly
     */
-   func reveal(_ value:CGFloat){/*value goes from 0 to 1*/
+   @objc public func reveal(_ value:CGFloat){/*value goes from 0 to 1*/
       //Swift.print("ProgressIndicator.reveal() value: " + "\(value)")
       revealProgress = value
       let initAlpha = lineStyle.strokeColor.cgColor.alpha//<--can be moved to a global scope
@@ -69,46 +69,6 @@ extension ProgressIndicator {
          guard let line:CAShapeLayer = self.shapeLayer.sublayers?[i] as? CAShapeLayer else { fatalError("line doesnt exist")}
 //         Swift.print("line:  \(line)")
          line.strokeColor = line.strokeColor?.copy(alpha: alpha)
-      }
-   }
-}
-/**
- * Iteration
- */
-fileprivate class IntParser{
-   /**
-    * Return a  Random number within a min max value
-    * EXAMPLE: IntParser.random(0,3)//Can return either of: 0,1,2,3
-    */
-   static func random(_ min:Int, _ max:Int)->Int{//returns an integer between 0 - x
-      return Int(arc4random_uniform(UInt32(max)) + UInt32(min))
-   }
-   /**
-    * Returns a normalized integer value (loopy index)
-    * NOTE: Great for iterating int arrays
-    * NOTE: Can be used for looping items in an array (carousel etc)
-    * EXAMPLE:
-    * print(IntParser.normalize(3, 7))//3
-    * print(IntParser.normalize(-3, 7))//4
-    * print(IntParser.normalize(0, 7))//0
-    * print(IntParser.normalize(7, 7))//0
-    * print(IntParser.normalize(8, 7))//1
-    * print(IntParser.normalize(12, 7))//5
-    * Was: return index >= 0 ? (index < len ? index : index % len) : (len + (index % len))//IMPORTANT: print(IntParser.normalize(-7, 7)) yields 7, which is wrong it should be 0
-    */
-   static func normalize(_ index:Int,_ len:Int) -> Int {
-      if index >= 0 {
-         if index < len{
-            return index
-         }else {
-            return index % len
-         }
-      }else {
-         if index % len == 0 {
-            return 0
-         }else {
-            return len + (index % len)
-         }
       }
    }
 }

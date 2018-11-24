@@ -3,11 +3,11 @@ import Chaplin
 /**
  * Create
  */
-extension ProgressIndicator {
+public extension ProgressIndicator {
    /**
     * Create ShapeLayer
     */
-   func createShapeLayer() -> CAShapeLayer{
+   @objc public func createShapeLayer() -> CAShapeLayer{
       let shapeLayer:CAShapeLayer = .init()
       shapeLayer.backgroundColor = UIColor.clear.cgColor
       self.layer.addSublayer(shapeLayer)
@@ -16,7 +16,7 @@ extension ProgressIndicator {
    /**
     * Creates the indicator lines
     */
-   func createIndicators() {
+   @objc public func createIndicators() {
       let center:CGPoint = CGPoint(x:frame.width/2, y:frame.height/2)//CGRect(origin:.zero,size:CGSize(frame.width,frame.height))//center of element
       //Swift.print("center: " + "\(center)")
       let radius:CGFloat = frame.width/4 - lineStyle.strokeWidth/2
@@ -45,7 +45,7 @@ extension ProgressIndicator {
    /**
     * Creates animator
     */
-   func createAnimator() -> TimeAnimator{
+   public func createAnimator() -> TimeAnimator{
       let animator = TimeAnimator(duration:1.0)
       animator.tick = {
          //Swift.print("animator.curCount:  \(animator.curCount)")
@@ -64,7 +64,7 @@ extension ProgressIndicator {
    /**
     * onComplete
     */
-   func onComplete(){
+   @objc public func onComplete(){
 //      Swift.print("loop again")
       self.animator.stop()
       self.animator = createAnimator()

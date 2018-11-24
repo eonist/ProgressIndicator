@@ -10,15 +10,15 @@ import Chaplin
  *    return [s.w,s.h]
  * }
  */
-class ProgressIndicator:UIView {
-   lazy var shapeLayer:CAShapeLayer = createShapeLayer()
-   var lineStyle:LineStyle = ProgressIndicator.defaultStyle
-   lazy var animator:TimeAnimator = createAnimator()//   lazy var animator:Animator = {LoopingAnimator(AnimProxy.shared,Int.max,1,0,1,self.progress,Linear.ease)}()
-   var revealProgress:CGFloat = 0
+open class ProgressIndicator:UIView {
+   open lazy var shapeLayer:CAShapeLayer = createShapeLayer()
+   open var lineStyle:LineStyle = ProgressIndicator.defaultStyle
+   open lazy var animator:TimeAnimator = createAnimator()//   lazy var animator:Animator = {LoopingAnimator(AnimProxy.shared,Int.max,1,0,1,self.progress,Linear.ease)}()
+   open var revealProgress:CGFloat = 0
    /**
     * Note: We relay on getting .frame in the subsequent called methods, as such we need to be mindful when we access it, as its only available after AutoLayout has done its bidding.
     */
-   override func layoutSubviews() {
+   override open func layoutSubviews() {
       super.layoutSubviews()
       self.backgroundColor = .lightGray
       createIndicators()

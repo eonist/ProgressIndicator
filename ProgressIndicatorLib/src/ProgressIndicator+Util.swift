@@ -1,6 +1,13 @@
 import UIKit
 
 /**
+ * TypeAlias / default values
+ */
+extension ProgressIndicator {
+   static let defaultStyle:LineStyle = (.clear,UIColor.black.withAlphaComponent(0.2),3)
+   public typealias LineStyle = (backgroundColor:UIColor,strokeColor:UIColor,strokeWidth:CGFloat)
+}
+/**
  * Math
  */
 internal extension CGPoint{
@@ -23,9 +30,70 @@ internal extension CGPoint{
    }
 }
 /**
- * TypeAlias / default values
+ * Iteration
  */
-extension ProgressIndicator {
-   static let defaultStyle:LineStyle = (.clear,UIColor.black.withAlphaComponent(0.2),3)
-   typealias LineStyle = (backgroundColor:UIColor,strokeColor:UIColor,strokeWidth:CGFloat)
+internal class IntParser{
+   /**
+    * Return a  Random number within a min max value
+    * EXAMPLE: IntParser.random(0,3)//Can return either of: 0,1,2,3
+    */
+   static func random(_ min:Int, _ max:Int)->Int{//returns an integer between 0 - x
+      return Int(arc4random_uniform(UInt32(max)) + UInt32(min))
+   }
+   /**
+    * Returns a normalized integer value (loopy index)
+    * NOTE: Great for iterating int arrays
+    * NOTE: Can be used for looping items in an array (carousel etc)
+    * EXAMPLE:
+    * print(IntParser.normalize(3, 7))//3
+    * print(IntParser.normalize(-3, 7))//4
+    * print(IntParser.normalize(0, 7))//0
+    * print(IntParser.normalize(7, 7))//0
+    * print(IntParser.normalize(8, 7))//1
+    * print(IntParser.normalize(12, 7))//5
+    * Was: return index >= 0 ? (index < len ? index : index % len) : (len + (index % len))//IMPORTANT: print(IntParser.normalize(-7, 7)) yields 7, which is wrong it should be 0
+    */
+   static func normalize(_ index:Int,_ len:Int) -> Int {
+      if index >= 0 {
+         if index < len{
+            return index
+         }else {
+            return index % len
+         }
+      }else {
+         if index % len == 0 {
+            return 0
+         }else {
+            return len + (index % len)
+         }
+      }
+   }
+}
+/**
+ * CGShape extension
+ */
+internal class CGShapeUtil {
+   /**
+    * Draw line
+    * NOTE: remember to: shapeLayer.addSublayer(lineLayer)
+    * It's also possible to do this with UIBezierPath
+    * let path:UIBezierPath = {
+    *    let aPath = UIBezierPath.init()
+    *    aPath.move(to: p1)
+    *    aPath.addLine(to: p2)
+    *    aPath.close()//Keep using the method addLineToPoint until you get to the one where about to close the path
+    *    return aPath
+    * }()
+    */
+   static func drawLine(_ lineLayer:CAShapeLayer, line:(p1:CGPoint, p2:CGPoint), style:(stroke:UIColor,strokeWidth:CGFloat)) -> CAShapeLayer{
+      let lineLayer:CAShapeLayer = .init()
+      let path:CGMutablePath = CGMutablePath()
+      path.move(to: line.p1)
+      path.addLine(to: line.p2)
+      lineLayer.path = path/*Setup the CAShapeLayer with the path, colors, and line width*/
+      lineLayer.strokeColor = style.stroke.cgColor
+      lineLayer.lineWidth = style.strokeWidth
+      lineLayer.lineCap = .round
+      return lineLayer
+   }
 }
