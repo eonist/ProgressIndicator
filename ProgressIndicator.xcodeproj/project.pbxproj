@@ -21,6 +21,10 @@
 		F114AEC021A9FEFE00942A28 /* ProgressIndicator+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F114AEBB21A9FEFE00942A28 /* ProgressIndicator+Animation.swift */; };
 		F114AEC121A9FEFE00942A28 /* ProgressIndicator+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = F114AEBC21A9FEFE00942A28 /* ProgressIndicator+Action.swift */; };
 		F114AEC421AA00DB00942A28 /* Chaplin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC321AA00DB00942A28 /* Chaplin.framework */; };
+		F114AEC621AA073D00942A28 /* Spatial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC521AA073D00942A28 /* Spatial.framework */; };
+		F114AEC721AA073D00942A28 /* Spatial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC521AA073D00942A28 /* Spatial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F114AEC921AA093400942A28 /* Chaplin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC821AA093400942A28 /* Chaplin.framework */; };
+		F114AECA21AA093400942A28 /* Chaplin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC821AA093400942A28 /* Chaplin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F114AEB221A9FE4A00942A28 /* ProgressIndicatorLib.framework in Embed Frameworks */,
+				F114AEC721AA073D00942A28 /* Spatial.framework in Embed Frameworks */,
+				F114AECA21AA093400942A28 /* Chaplin.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +70,8 @@
 		F114AEBB21A9FEFE00942A28 /* ProgressIndicator+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressIndicator+Animation.swift"; sourceTree = "<group>"; };
 		F114AEBC21A9FEFE00942A28 /* ProgressIndicator+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressIndicator+Action.swift"; sourceTree = "<group>"; };
 		F114AEC321AA00DB00942A28 /* Chaplin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chaplin.framework; path = Carthage/Build/iOS/Chaplin.framework; sourceTree = "<group>"; };
+		F114AEC521AA073D00942A28 /* Spatial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spatial.framework; path = Carthage/Build/iOS/Spatial.framework; sourceTree = "<group>"; };
+		F114AEC821AA093400942A28 /* Chaplin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chaplin.framework; path = Carthage/Build/iOS/Chaplin.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F114AEB121A9FE4A00942A28 /* ProgressIndicatorLib.framework in Frameworks */,
+				F114AEC621AA073D00942A28 /* Spatial.framework in Frameworks */,
+				F114AEC921AA093400942A28 /* Chaplin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +99,8 @@
 		F114AE8721A9FE2500942A28 = {
 			isa = PBXGroup;
 			children = (
+				F114AEC821AA093400942A28 /* Chaplin.framework */,
+				F114AEC521AA073D00942A28 /* Spatial.framework */,
 				F114AE9221A9FE2500942A28 /* ProgressIndicator */,
 				F114AEAB21A9FE4A00942A28 /* ProgressIndicatorLib */,
 				F114AE9121A9FE2500942A28 /* Products */,
@@ -431,6 +443,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ProgressIndicator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,6 +465,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ProgressIndicator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
