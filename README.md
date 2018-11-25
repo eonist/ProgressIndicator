@@ -9,7 +9,8 @@
 - Customisable / Overridable / Supply your own design
 
 ### How does it work:
-- Uses Chaplin for animation
+- Uses [Chaplin](https://github.com/eonist/Chaplin) for animation
+- Uses the CAShapeLayer in UIView to draw graphics
 
 ### How do I get it:
 - Carthage: `github "eonist/ProgressIndicator" "master"`
