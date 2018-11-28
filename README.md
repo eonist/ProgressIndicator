@@ -1,5 +1,7 @@
 # ProgressIndicator
 
+[![codebeat badge](https://codebeat.co/badges/e92b544e-97c1-49cb-8dfc-6b52fa84a487)](https://codebeat.co/projects/github-com-eonist-progressindicator-master)
+
 <img width="211" alt="img" src="https://rawgit.com/stylekit/img/master/progressindicator.gif">
 
 ### What is it:
