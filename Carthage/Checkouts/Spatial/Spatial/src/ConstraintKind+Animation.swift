@@ -1,6 +1,36 @@
 #if os(iOS)
 import UIKit
 /**
+ * Animation
+ */
+extension ConstraintKind where Self:UIView{//TODO ⚠️️ use UIViewConstraintKind
+   /**
+    * Animates a UIView that adhers to ConstraintKind (hor)
+    * Example: btn.animate(to:100,align:left,alignTo:.left)
+    */
+   public func animate(to:CGFloat, align:HorizontalAlign, alignTo:HorizontalAlign, onComplete:@escaping AnimComplete = Self.defaultOnComplete){
+      UIView.animate({
+         self.update(offset: to, align: align, alignTo: alignTo)
+      }, onComplete:onComplete)
+   }
+   /**
+    * Anim (ver)
+    */
+   public func animate(to:CGFloat, align:VerticalAlign, alignTo:VerticalAlign, onComplete:@escaping AnimComplete = Self.defaultOnComplete){
+      UIView.animate({
+         self.update(offset: to, align: align, alignTo: alignTo)
+      }, onComplete:onComplete)
+   }
+   /**
+    * Anim (ver,hor)
+    */
+   public func animate(to:CGPoint, align:Alignment, alignTo:Alignment, onComplete:@escaping AnimComplete = Self.defaultOnComplete){
+      UIView.animate({
+         self.update(offset: to, align: align, alignTo: alignTo)
+      }, onComplete:onComplete)
+   }
+}
+/**
  * Offset horizontally or vertically
  */
 extension ConstraintKind where Self:UIView{
@@ -11,8 +41,8 @@ extension ConstraintKind where Self:UIView{
     * Internal (Anchor)
     */
    private func updateAnchor(_ closure:UpdateAnchorClosure) {
-      guard let superview:UIView = self.superview else {fatalError("err superview not available")}
-      guard let oldAnchor = self.anchor else {fatalError("err anchor not available")}
+      guard let superview:UIView = self.superview else {Swift.print("err superview not available");return}
+      guard let oldAnchor = self.anchor else {Swift.print("err anchor not available");return}
       closure(superview,oldAnchor)
       superview.layoutIfNeeded()/*The superview is responsible for updating subView constraint updates*/
    }
@@ -20,8 +50,8 @@ extension ConstraintKind where Self:UIView{
     * Internal (Size)
     */
    private func updateSize(_ closure:UpdateSizeClosure) {
-      guard let superview:UIView = self.superview else {fatalError("err superview not available")}
-      guard let oldSize = self.size else {fatalError("err sice not available")}
+      guard let superview:UIView = self.superview else {Swift.print("err superview not available");return}
+      guard let oldSize = self.size else {Swift.print("err sice not available");return}
       closure(superview,oldSize)
       superview.layoutIfNeeded()/*The superview is responsible for updating subView constraint updates*/
    }
@@ -76,9 +106,9 @@ extension ConstraintKind where Self:UIView{
     * IMPORTANT: ⚠️️ offset.size is actual size, not offset of the size ⚠️️
     */
    public func update(offset:CGRect, align:Alignment, alignTo:Alignment/*, multiplier:CGPoint*/){
-      guard let superview:UIView = self.superview else {fatalError("err superview not available")}
-      guard let oldAnchor = self.anchor else {fatalError("err anchor not available")}
-      guard let oldSize = self.size else {fatalError("err sice not available")}
+      guard let superview:UIView = self.superview else {Swift.print("err superview not available");return}
+      guard let oldAnchor = self.anchor else {Swift.print("err anchor not available");return}
+      guard let oldSize = self.size else {Swift.print("err sice not available");return}
       NSLayoutConstraint.deactivate([oldAnchor.y, oldAnchor.x, oldSize.w, oldSize.h])
       let newAnchor = Constraint.anchor(self, to: superview, align: align, alignTo: alignTo,offset:offset.origin)
       let newSize = Constraint.size(self, size: offset.size/*, multiplier: */ )
@@ -86,24 +116,6 @@ extension ConstraintKind where Self:UIView{
       self.anchor = newAnchor
       self.size = newSize
       superview.layoutIfNeeded()/*The superview is responsible for updating subView constraint updates*/
-   }
-}
-/**
- * Animation
- */
-extension ConstraintKind where Self:UIView{//TODO ⚠️️ use UIViewConstraintKind
-   /**
-    * Animates a UIView that adhers to ConstraintKind (hor)
-    * Example: btn.animate(to:100,align:left,alignTo:.left)
-    */
-   public func animate(to:CGFloat, align:HorizontalAlign, alignTo:HorizontalAlign, onComplete:@escaping AnimComplete = Self.defaultOnComplete){
-      UIView.animate({self.update(offset: to, align: align, alignTo: alignTo)},onComplete:onComplete)
-   }
-   /**
-    * Anim for ver
-    */
-   public func animate(to:CGFloat, align:VerticalAlign = .top, alignTo:VerticalAlign = .top, onComplete:@escaping AnimComplete = Self.defaultOnComplete){
-      UIView.animate({self.update(offset: to, align: align, alignTo: alignTo)},onComplete:onComplete)
    }
 }
 /**

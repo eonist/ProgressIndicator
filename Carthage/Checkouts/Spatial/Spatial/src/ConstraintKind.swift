@@ -5,26 +5,30 @@ import UIKit
  * NOTE: Storing Constraints is a must if you want to change the constraints at a later point in time
  */
 public protocol ConstraintKind:class{
+//   var constraint:OptionalAnchorAndSize? {get set}
    var anchor:AnchorConstraint? {get set}
    var size:SizeConstraint? {get set}
 }
 /**
- * NOTE: Convenient UIView so you dont have to add anchor and size your self
+ * Note: possible upgrade to this functionality later
  */
-open class ConstraintView:UIView,ConstraintKind{
-   public var anchor: AnchorConstraint?
-   public var size: SizeConstraint?
+extension ConstraintKind {
+   public typealias AnchorAndSize = (anchor:AnchorConstraint, size:SizeConstraint)//
+//   public var anchor: AnchorConstraint? {  get { return constraint?.anchor }set{ constraint?.anchor = newValue } }
+//   public var size: SizeConstraint? { get { return constraint?.size } set{  constraint?.size = newValue } }
 }
 /**
  * Update constraints (For items that are of type ConstraintKind)
  */
 extension ConstraintKind where Self:UIView{
    /**
+    * Cobinational types and closure signatures
     * TODO: ⚠️️ This could be usefull in a global domain, for now just access it by: ConstraintKind.UIViewConstraintKind
     */
    public typealias UIViewConstraintKind = UIView & ConstraintKind
-   public typealias AnchorAndSize = (anchor:AnchorConstraint,size:SizeConstraint)//
-   public typealias ConstraintKindClosure = (_ view:UIViewConstraintKind) -> AnchorAndSize
+   
+//   public typealias OptionalAnchorAndSize = (anchor:AnchorConstraint?, size:SizeConstraint?)//
+//   public typealias ConstraintKindClosure = (_ view:UIViewConstraintKind) -> AnchorAndSize
    /**
     * Same as UIView().activateConstraint... but also sets size and anchor constraints (ConstraintKind) (For animation etc)
     * TODO: ⚠️️ maybe reuse the code from activateConstraint, by forwarning the closure etc. Nope, cant call closure twice
@@ -37,11 +41,31 @@ extension ConstraintKind where Self:UIView{
     * }
     * NOTE: this had to be renamed to setAndActivateConstraint, as overriding the default extension method didnt work so well when you passed the variable into a method
     */
-   public func applyConstraint(closure:ConstraintKindClosure) {
+   public func applyConstraint(closure:ConstraintsClosure) {
       self.translatesAutoresizingMaskIntoConstraints = false
       let constraints:AnchorAndSize = closure(self)/*the constraints is returned from the closure*/
       setConstraint(anchor: constraints.anchor, size: constraints.size)
       NSLayoutConstraint.activate([constraints.anchor.x,constraints.anchor.y,constraints.size.w,constraints.size.h])
+   }
+   /**
+    * Apply anchor
+    */
+   public func applyAnchor(closure:AnchorClosure)  {
+      self.translatesAutoresizingMaskIntoConstraints = false
+      let anchorConstraint:AnchorConstraint = closure(self)/*the constraints is returned from the closure*/
+      let constraints:[NSLayoutConstraint] = [anchorConstraint.x,anchorConstraint.y]
+      self.anchor = anchorConstraint
+      NSLayoutConstraint.activate(constraints)
+   }
+   /**
+    * Apply size
+    */
+   public func applySize(closure:SizeClosure) {
+      self.translatesAutoresizingMaskIntoConstraints = false
+      let sizeConstraint:SizeConstraint = closure(self)/*the constraints is returned from the closure*/
+      let constraints:[NSLayoutConstraint] = [sizeConstraint.w,sizeConstraint.h]
+      self.size = sizeConstraint
+      NSLayoutConstraint.activate(constraints)
    }
    /**
     * Convenient
@@ -72,7 +96,6 @@ extension Array where Element:ConstraintKind.UIViewConstraintKind{
          let anchor:AnchorConstraint = constraints.anchorConstraints[$0.offset]
          let size:SizeConstraint = constraints.sizeConstraints[$0.offset]
          $0.element.setConstraint(anchor:anchor,size:size)
-         
       }
       let layoutConstraints:[NSLayoutConstraint] = {
          let anchors = constraints.anchorConstraints.reduce([]) { $0 + [$1.x,$1.y] }

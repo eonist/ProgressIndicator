@@ -1,5 +1,6 @@
 #if os(iOS)
 import UIKit
+
 public typealias AnchorConstraint = (x:NSLayoutConstraint,y:NSLayoutConstraint)
 public typealias SizeConstraint = (w:NSLayoutConstraint,h:NSLayoutConstraint)
 public typealias AnchorConstraintsAndSizeConstraints = (anchorConstraints:[AnchorConstraint],sizeConstraints:[SizeConstraint])
@@ -13,12 +14,12 @@ public typealias AnchorConstraintsAndSizeConstraints = (anchorConstraints:[Ancho
 public class Constraint{
    /**
     * Creates a positional constraint
-    * TODO: ⚠️️ Rename to pin 👌, to differentiate from anchor, point, origin, position?
+    * TODO: ⚠️️ Rename to pin 👌, to differentiate from anchor, point, origin, position? 🤷  
     */
    public static func anchor(_ view:UIView, to:UIView, align:Alignment, alignTo:Alignment, offset:CGPoint = CGPoint(), useMargin:Bool = false) -> AnchorConstraint {/*,offset:CGPoint = CGPoint()*/
-      let horConstraint = Constraint.anchor(view, to: to, align: align.horAlign, alignTo: alignTo.horAlign,offset:offset.x,useMargin:useMargin)
-      let verConstraint = Constraint.anchor(view, to: to, align: align.verAlign, alignTo: alignTo.verAlign,offset:offset.y,useMargin:useMargin)
-      return (horConstraint,verConstraint)
+      let horizontal:NSLayoutConstraint = Constraint.anchor(view, to: to, align: align.horAlign, alignTo: alignTo.horAlign,offset:offset.x,useMargin:useMargin)
+      let vertical:NSLayoutConstraint = Constraint.anchor(view, to: to, align: align.verAlign, alignTo: alignTo.verAlign,offset:offset.y,useMargin:useMargin)
+      return (horizontal,vertical)
    }
    /**
     * Horizontal
@@ -45,33 +46,40 @@ public class Constraint{
 extension Constraint{
    /**
     * Creates a dimensional constraint
-    * TODO: ⚠️️ Rename to dimension 👌, to differentiate from the Apple name convention of frame, size, bound etc, dimension is so long 🤔
-    * EXAMPLE: let widthConstraint = Constraint.size(square,to:canvas).w
-    */
-   public static func size(_ view:UIView, to:UIView) -> SizeConstraint{
-      let widthConstraint = Constraint.width(view,to:to)
-      let heightConstraint = Constraint.height(view,to:to)
-      return (widthConstraint,heightConstraint)
-   }
-   /**
-    * Creates a dimensional constraint
     * EXAMPLE: let sizeConstraint = Constraint.size(square,to:canvas,offset:.zero,multiplier:.init(x:1,y:0.5))
     * TODO: ⚠️️ offset should be CGSize
     * TODO: Wrong, it was just a bug that the multiplier was zero 👉 ⚠️️ The offset is pointless ⚠️️ as it doesnt offset, it sets size directly with out taking in account of the to, actually it works in some cases
+    * EXAMPLE: let widthConstraint = Constraint.size(square,to:canvas).w
     */
    public static func size(_ view:UIView, to:UIView, offset:CGPoint = .zero, multiplier:CGPoint = CGPoint(x:1,y:1)) -> SizeConstraint{
-      let widthConstraint = Constraint.width(view, to: to, offset: offset.x, multiplier: multiplier.x)
-      let heightConstraint = Constraint.height(view, to: to, offset: offset.y, multiplier: multiplier.y)
-      return (widthConstraint,heightConstraint)
+      let w = Constraint.width(view, to: to, offset: offset.x, multiplier: multiplier.x)
+      let h = Constraint.height(view, to: to, offset: offset.y, multiplier: multiplier.y)
+      return (w,h)
    }
    /**
     * EXAMPLE: let sizeConstraint = Constraint.size(square,size:CGSize(100,100))
     * TODO: ⚠️️ offset should be CGSize
     */
    public static func size(_ view:UIView, size:CGSize, multiplier:CGSize = CGSize(width:1,height:1)) -> SizeConstraint{
-      let widthConstraint = Constraint.width(view, width: size.width, multiplier: multiplier.width)
-      let heightConstraint = Constraint.height(view, height: size.height, multiplier: multiplier.height)
-      return (widthConstraint,heightConstraint)
+      let w = Constraint.width(view, width: size.width, multiplier: multiplier.width)
+      let h = Constraint.height(view, height: size.height, multiplier: multiplier.height)
+      return (w,h)
+   }
+   /**
+    * Returns size tuple (based on parent and or width or height)
+    * EXAMPLE: let s = Constraint.size(view, to:parent, height:48)
+    * TODO: ⚠️️ offset should be CGSize
+    */
+   public static func size(_ view:UIView, to:UIView, width:CGFloat? = nil, height:CGFloat? = nil, offset:CGPoint = .zero, multiplier:CGSize = CGSize(width:1,height:1))  -> SizeConstraint {
+      let w:NSLayoutConstraint = {
+         if let width = width { return Constraint.width(view, width: width, multiplier: multiplier.width) }
+         else { return Constraint.width(view, to: to, offset: offset.x, multiplier: multiplier.width) }
+      }()
+      let h:NSLayoutConstraint = {
+         if let height = height { return Constraint.height(view, height: height, multiplier: multiplier.height) }
+         else { return Constraint.height(view, to: to, offset: offset.y, multiplier: multiplier.height) }
+      }()
+      return (w,h)
    }
    /**
     * Creates a width constraint (based on a CGFloat width)
@@ -139,6 +147,7 @@ extension Constraint{
 }
 /**
  * AutoLayout Sugar for UIView
+ * NOTE: Method overloading doesn't work with closures so each method name needs to be unique 🤷
  */
 extension UIView{
    /*We keep AnchorsAndSizes in a tuple, because applyConstraints wouldn't work with just an array*/
@@ -147,6 +156,10 @@ extension UIView{
    /*Tuple*/
    public typealias AnchorAndSize = (anchor:AnchorConstraint,size:SizeConstraint)
    public typealias ConstraintsClosure = (_ view:UIView) -> AnchorAndSize
+   /*Single*/
+   public typealias AnchorClosure = (_ view:UIView) -> AnchorConstraint
+   public typealias SizeClosure = (_ view:UIView) -> SizeConstraint
+//   public typealias ConstraintSignature = (_ view:UIView) -> NSLayoutConstraint
    /**
     * EXAMPLE:
     * button.activateConstraint{ view in
@@ -154,6 +167,7 @@ extension UIView{
     *      let size = Constraint.size(view, size: CGSize.init(width: UIScreen.main.bounds.width, height: TopBar.topBarHeight))
     *      return [anchor.x,anchor.y,size.w,size.h]
     * }
+    * TODO: ⚠️️ Rename to activateConstraints, and make activateConstraint only for 1 layoutconstraint
     */
    public func activateConstraint(closure:ConstraintClosure) {
       self.translatesAutoresizingMaskIntoConstraints = false
@@ -168,11 +182,30 @@ extension UIView{
     *    let s = Constraint.size(view, to: self)
     *    return (a,s)
     * }
+    * TODO: ⚠️️ Rename to activcateAnchorSize ?
     */
    public func activateConstraints(closure:ConstraintsClosure){
       self.translatesAutoresizingMaskIntoConstraints = false
-      let anchorAndSize:AnchorAndSize = closure(self)
-      let constraints:[NSLayoutConstraint] = [anchorAndSize.anchor.x,anchorAndSize.anchor.y,anchorAndSize.size.w,anchorAndSize.size.h]/*the constraints is returned from the closure*/
+      let anchorAndSize:AnchorAndSize = closure(self)/*the constraints is returned from the closure*/
+      let constraints:[NSLayoutConstraint] = [anchorAndSize.anchor.x,anchorAndSize.anchor.y,anchorAndSize.size.w,anchorAndSize.size.h]
+      NSLayoutConstraint.activate(constraints)
+   }
+   /**
+    * Activate for AnchorConstraint
+    */
+   public func activateAnchor(closure:AnchorClosure)  {
+      self.translatesAutoresizingMaskIntoConstraints = false
+      let anchorConstraint:AnchorConstraint = closure(self)/*the constraints is returned from the closure*/
+      let constraints:[NSLayoutConstraint] = [anchorConstraint.x,anchorConstraint.y]
+      NSLayoutConstraint.activate(constraints)
+   }
+   /**
+    * Activate for SizeConstraint
+    */
+   public func activateSize(closure:SizeClosure){
+      self.translatesAutoresizingMaskIntoConstraints = false
+      let sizeConstraint:SizeConstraint = closure(self)/*the constraints is returned from the closure*/
+      let constraints:[NSLayoutConstraint] = [sizeConstraint.w,sizeConstraint.h]
       NSLayoutConstraint.activate(constraints)
    }
 }
@@ -205,7 +238,7 @@ extension Array where Element:UIView{
     * TODO: ⚠️️ Complete this, instead of returning array, return tuple, like the same function as for single view
     */
    func activateConstraints(){
-   
+
    }
 }
 // self.enumerated().forEach { (view, i) in
