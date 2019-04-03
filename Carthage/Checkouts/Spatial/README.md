@@ -1,5 +1,5 @@
 # Spatial
-![mit](https://img.shields.io/badge/License-MIT-brightgreen.svg) ![platform](https://img.shields.io/badge/Platform-iOS-blue.svg) ![Lang](https://img.shields.io/badge/Language-Swift%204.2-orange.svg)
+![mit](https://img.shields.io/badge/License-MIT-brightgreen.svg) ![platform](https://img.shields.io/badge/Platform-iOS-blue.svg) ![platform](https://img.shields.io/badge/Platform-macOS-blue.svg) ![Lang](https://img.shields.io/badge/Language-Swift%205.0-orange.svg)
 [![codebeat badge](https://codebeat.co/badges/b4ee0d27-b00c-464b-b9b2-c9906cb6c19f)](https://codebeat.co/projects/github-com-eonist-spatial-master)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -24,29 +24,38 @@ Hassle-free AutoLayout, tailored for interactivity and animation.
 ### Example:
 
 ```swift
-/*Single*/
-btn1.activateConstraint{ view in
-   let anchor = Constraint.anchor(view, to: self, align: .topLeft, alignTo: .topLeft)
-   let size = Constraint.size(view, size: CGSize.init(width: 96, height: 24))
-   return [anchor.x,anchor.y,size.w,size.h]
+/*One-liner, single*/
+btn1.anchorAndSize(to: self, width: 96, height: 24)
+
+/*Long-hand, single*/
+btn1.activateAnchorAndSize{ view in
+	let a = Constraint.anchor(view, to: self)
+	let s = Constraint.size(view, width:96, height:24)
+	return (a,s)
 }
 ```
 
 ```swift
-/*Bulk*/
-[btn1,btn2,btn3].activateConstraint { views in
+/*Short-hand, bulk*/
+[btn1,btn2,btn3].distributeAndSize(dir:.vertical, width:96, height:24)
+
+/*Long-hand, bulk*/
+[btn1,btn2,btn3].activateAnchorsAndSizes { views in
    let anchors = Constraint.distribute(vertically: views, align: .topLeft)
-   let sizes = views.map{Constraint.size($0, size: CGSize(width:96,height:42))}
+   let sizes = views.map{$0.size(width:96,height:42)}
    return (anchors, sizes)
 }
 ```
+
 
 ```swift
 /*Animation*/
 btn.animate(to:100,align:left,alignTo:.left)
 ```
 ### Todo:
-- Complete the spaceAround and spaceBetween methods
-- Add one-liner accessors
-- Watch https://www.youtube.com/watch?v=bJI6z-7uNGQ
-- Read https://savvyapps.com/blog/advanced-ios-animations-with-auto-layout
+- Complete the spaceAround and spaceBetween methods ✅
+- Add macOS support ✅
+- Make examples with AutoLayout margins not
+- Add methods for applyAnchor for horizontal and vertical types
+- Document every param in every declaration (Since the API is more stable now) 👈
+- Consider renaming anchor and size to pin and fit

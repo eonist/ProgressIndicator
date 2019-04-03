@@ -1,18 +1,9 @@
 {
-  "Mac" : [
-
-  ],
-  "watchOS" : [
-
-  ],
-  "tvOS" : [
-
-  ],
-  "commitish" : "38f39141a487e71d0e49d9fca1dd62e42ded314c",
+  "commitish" : "0451ab1cbe3cc756f85e3f391de41b0b599f626c",
   "iOS" : [
     {
       "name" : "Chaplin",
-      "hash" : "36f24134fb8b833cbe7917488302958e3480e5e35e028be79bfa0feb5aa22d50"
+      "hash" : "4af38bfb1db6cfaf4866309b633035033f2b6d52afca8d8f9f05c255fc7688ea"
     }
   ]
 }

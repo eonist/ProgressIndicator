@@ -3,7 +3,7 @@ import Chaplin
 /**
  * Create
  */
-public extension ProgressIndicator {
+extension ProgressIndicator {
    /**
     * Create ShapeLayer
     */

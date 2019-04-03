@@ -3,7 +3,7 @@ import Foundation
 /**
  * Action
  */
-public extension ProgressIndicator {
+extension ProgressIndicator {
    /**
     * Esentially you start a repeating animation that modulates a value from 0 - 1 of a defined time over n-times
     */

@@ -4,7 +4,7 @@ import Chaplin
 /**
  * Animation
  */
-public extension ProgressIndicator {
+extension ProgressIndicator {
    /**
     * Modulate the progress indicator (For iterative progress or looping animation)
     * PARAM: value: 0 - 1
