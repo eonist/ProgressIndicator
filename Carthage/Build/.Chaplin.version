@@ -1,0 +1,9 @@
+{
+  "commitish" : "784db21f7f04d7599a8090e9d9b24eaa637d0f7c",
+  "iOS" : [
+    {
+      "name" : "Chaplin",
+      "hash" : "b42434563aa6c9bc918c56040b69a181611cbf9c9f65491bfbcc941a00f08b51"
+    }
+  ]
+}
