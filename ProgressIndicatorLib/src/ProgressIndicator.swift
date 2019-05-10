@@ -1,8 +1,7 @@
 import UIKit
 import Chaplin
-
 /**
- * EXAMPLE:
+ * ## Examples:
  * let progressIndicator = ProgressIndicator.init()
  * container.addSubview(progressIndicator)
  * progressIndicator.activateConstraint { view in
@@ -10,17 +9,16 @@ import Chaplin
  *    return [s.w,s.h]
  * }
  */
-open class ProgressIndicator:UIView {
-   open lazy var shapeLayer:CAShapeLayer = createShapeLayer()
-   open var lineStyle:LineStyle = ProgressIndicator.defaultStyle
-   open lazy var animator:TimeAnimator = createAnimator()//   lazy var animator:Animator = {LoopingAnimator(AnimProxy.shared,Int.max,1,0,1,self.progress,Linear.ease)}()
-   open var revealProgress:CGFloat = 0
-   public override init(frame: CGRect) {
+open class ProgressIndicator: UIView {
+   open lazy var shapeLayer: CAShapeLayer = createShapeLayer()
+   open var lineStyle: LineStyle = ProgressIndicator.defaultStyle
+   open lazy var animator: TimeAnimator = createAnimator()//   lazy var animator:Animator = {LoopingAnimator(AnimProxy.shared,Int.max,1,0,1,self.progress,Linear.ease)}()
+   open var revealProgress: CGFloat = 0
+   override public init(frame: CGRect) {
       super.init(frame: frame)
       self.backgroundColor = .lightGray
    }
-   
-   required public init?(coder aDecoder: NSCoder) {
+   public required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
    }
    /**

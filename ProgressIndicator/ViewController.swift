@@ -3,7 +3,7 @@ import ProgressIndicatorLib
 import Spatial
 
 class ViewController: UIViewController {
-   lazy var progressIndicator:ProgressIndicator = createProgressIndicator()
+   lazy var progressIndicator: ProgressIndicator = createProgressIndicator()
    override func viewDidLoad() {
       super.viewDidLoad()
       _ = progressIndicator
@@ -13,18 +13,18 @@ class ViewController: UIViewController {
 /**
  * Create
  */
-extension ViewController{
+extension ViewController {
    /**
     * ProgressIndicator
     */
-   @objc func createProgressIndicator() -> ProgressIndicator{
+   @objc func createProgressIndicator() -> ProgressIndicator {
       //let frame:CGRect = CGRect.init(origin: .zero, size: CGSize(width:164,height:164))
-      let progressIndicator:ProgressIndicator = ProgressIndicator.init()
+      let progressIndicator: ProgressIndicator = .init()
       self.view.addSubview(progressIndicator)
       progressIndicator.activateAnchorAndSize { view in
          let a = Constraint.anchor(view, to: self.view, align: .centerCenter, alignTo: .centerCenter)
-         let s = Constraint.size(view, size: .init(width:164,height:164))
-         return (a,s)
+         let s = Constraint.size(view, size: .init(width: 164, height: 164))
+         return (a, s)
       }
       return progressIndicator
    }
