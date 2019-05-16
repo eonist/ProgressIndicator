@@ -20,11 +20,18 @@
 		F114AEBF21A9FEFE00942A28 /* ProgressIndicator+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = F114AEBA21A9FEFD00942A28 /* ProgressIndicator+Create.swift */; };
 		F114AEC021A9FEFE00942A28 /* ProgressIndicator+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F114AEBB21A9FEFE00942A28 /* ProgressIndicator+Animation.swift */; };
 		F114AEC121A9FEFE00942A28 /* ProgressIndicator+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = F114AEBC21A9FEFE00942A28 /* ProgressIndicator+Action.swift */; };
-		F114AEC421AA00DB00942A28 /* Chaplin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC321AA00DB00942A28 /* Chaplin.framework */; };
-		F114AEC621AA073D00942A28 /* Spatial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC521AA073D00942A28 /* Spatial.framework */; };
-		F114AEC721AA073D00942A28 /* Spatial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC521AA073D00942A28 /* Spatial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F114AEC921AA093400942A28 /* Chaplin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC821AA093400942A28 /* Chaplin.framework */; };
-		F114AECA21AA093400942A28 /* Chaplin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC821AA093400942A28 /* Chaplin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F1C2172F228DE5A3005B445B /* Chaplin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F114AEC321AA00DB00942A28 /* Chaplin.framework */; };
+		F1C21730228DE5A3005B445B /* SimpleTimerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C2172B228DE201005B445B /* SimpleTimerLib.framework */; };
+		F1C21731228DE5A3005B445B /* With.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C2172C228DE201005B445B /* With.framework */; };
+		F1C21733228DE5A3005B445B /* Spatial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21732228DE5A3005B445B /* Spatial.framework */; };
+		F1C21738228DE5B1005B445B /* Chaplin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21734228DE5B0005B445B /* Chaplin.framework */; };
+		F1C21739228DE5B1005B445B /* Chaplin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21734228DE5B0005B445B /* Chaplin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F1C2173A228DE5B1005B445B /* With.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21735228DE5B0005B445B /* With.framework */; };
+		F1C2173B228DE5B1005B445B /* With.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21735228DE5B0005B445B /* With.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F1C2173C228DE5B1005B445B /* SimpleTimerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21736228DE5B1005B445B /* SimpleTimerLib.framework */; };
+		F1C2173D228DE5B1005B445B /* SimpleTimerLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21736228DE5B1005B445B /* SimpleTimerLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F1C2173E228DE5B1005B445B /* Spatial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21737228DE5B1005B445B /* Spatial.framework */; };
+		F1C2173F228DE5B1005B445B /* Spatial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1C21737228DE5B1005B445B /* Spatial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +51,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F1C21739228DE5B1005B445B /* Chaplin.framework in Embed Frameworks */,
 				F114AEB221A9FE4A00942A28 /* ProgressIndicatorLib.framework in Embed Frameworks */,
-				F114AEC721AA073D00942A28 /* Spatial.framework in Embed Frameworks */,
-				F114AECA21AA093400942A28 /* Chaplin.framework in Embed Frameworks */,
+				F1C2173D228DE5B1005B445B /* SimpleTimerLib.framework in Embed Frameworks */,
+				F1C2173F228DE5B1005B445B /* Spatial.framework in Embed Frameworks */,
+				F1C2173B228DE5B1005B445B /* With.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,8 +79,13 @@
 		F114AEBB21A9FEFE00942A28 /* ProgressIndicator+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressIndicator+Animation.swift"; sourceTree = "<group>"; };
 		F114AEBC21A9FEFE00942A28 /* ProgressIndicator+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressIndicator+Action.swift"; sourceTree = "<group>"; };
 		F114AEC321AA00DB00942A28 /* Chaplin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chaplin.framework; path = Carthage/Build/iOS/Chaplin.framework; sourceTree = "<group>"; };
-		F114AEC521AA073D00942A28 /* Spatial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spatial.framework; path = Carthage/Build/iOS/Spatial.framework; sourceTree = "<group>"; };
-		F114AEC821AA093400942A28 /* Chaplin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chaplin.framework; path = Carthage/Build/iOS/Chaplin.framework; sourceTree = "<group>"; };
+		F1C2172B228DE201005B445B /* SimpleTimerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleTimerLib.framework; path = Carthage/Build/iOS/SimpleTimerLib.framework; sourceTree = "<group>"; };
+		F1C2172C228DE201005B445B /* With.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = With.framework; path = Carthage/Build/iOS/With.framework; sourceTree = "<group>"; };
+		F1C21732228DE5A3005B445B /* Spatial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spatial.framework; path = Carthage/Build/iOS/Spatial.framework; sourceTree = "<group>"; };
+		F1C21734228DE5B0005B445B /* Chaplin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chaplin.framework; path = Carthage/Build/iOS/Chaplin.framework; sourceTree = "<group>"; };
+		F1C21735228DE5B0005B445B /* With.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = With.framework; path = Carthage/Build/iOS/With.framework; sourceTree = "<group>"; };
+		F1C21736228DE5B1005B445B /* SimpleTimerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleTimerLib.framework; path = Carthage/Build/iOS/SimpleTimerLib.framework; sourceTree = "<group>"; };
+		F1C21737228DE5B1005B445B /* Spatial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spatial.framework; path = Carthage/Build/iOS/Spatial.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +93,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1C21738228DE5B1005B445B /* Chaplin.framework in Frameworks */,
 				F114AEB121A9FE4A00942A28 /* ProgressIndicatorLib.framework in Frameworks */,
-				F114AEC621AA073D00942A28 /* Spatial.framework in Frameworks */,
-				F114AEC921AA093400942A28 /* Chaplin.framework in Frameworks */,
+				F1C2173C228DE5B1005B445B /* SimpleTimerLib.framework in Frameworks */,
+				F1C2173E228DE5B1005B445B /* Spatial.framework in Frameworks */,
+				F1C2173A228DE5B1005B445B /* With.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +105,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F114AEC421AA00DB00942A28 /* Chaplin.framework in Frameworks */,
+				F1C21733228DE5A3005B445B /* Spatial.framework in Frameworks */,
+				F1C2172F228DE5A3005B445B /* Chaplin.framework in Frameworks */,
+				F1C21730228DE5A3005B445B /* SimpleTimerLib.framework in Frameworks */,
+				F1C21731228DE5A3005B445B /* With.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,8 +118,10 @@
 		F114AE8721A9FE2500942A28 = {
 			isa = PBXGroup;
 			children = (
-				F114AEC821AA093400942A28 /* Chaplin.framework */,
-				F114AEC521AA073D00942A28 /* Spatial.framework */,
+				F1C21734228DE5B0005B445B /* Chaplin.framework */,
+				F1C21736228DE5B1005B445B /* SimpleTimerLib.framework */,
+				F1C21737228DE5B1005B445B /* Spatial.framework */,
+				F1C21735228DE5B0005B445B /* With.framework */,
 				F114AE9221A9FE2500942A28 /* ProgressIndicator */,
 				F114AEAB21A9FE4A00942A28 /* ProgressIndicatorLib */,
 				F114AE9121A9FE2500942A28 /* Products */,
@@ -155,6 +176,9 @@
 		F114AEC221AA00DB00942A28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F1C21732228DE5A3005B445B /* Spatial.framework */,
+				F1C2172B228DE201005B445B /* SimpleTimerLib.framework */,
+				F1C2172C228DE201005B445B /* With.framework */,
 				F114AEC321AA00DB00942A28 /* Chaplin.framework */,
 			);
 			name = Frameworks;
